@@ -35,11 +35,11 @@
 
 --I would have to build one from scratch.
 
-USE Weather_Observation_Station_2;
-SELECT ID
-	FROM STATION
-	GROUP BY ID
-	HAVING COUNT(*) >1;
+--USE Weather_Observation_Station_2;
+--SELECT ID
+--	FROM STATION
+--	GROUP BY ID
+--	HAVING COUNT(*) >1;
 
 --Nice, I ran into an error.
 --it seems that I need to use GROUP BY in order to use COUNT().
@@ -57,4 +57,95 @@ SELECT ID
 --it seems like GROUP BY is first and the count().
 --not sure why.
 
+--------------------------------------12 09 2024-------------------------------------
+
+--I will now continue on solving the problem.
+--I will check on why I have to use GROUP BY() when using aggregators like COUNT() later.
+
+--I think for now I just have to learn that otherwise, it leads to an error.
+--I am unsure why, at least in my elementary case.
+--I have to use GROUP BY.
+
+--I think I get it.
+--SELECT doesn't do the math.  
+--SELECT just displays.
+
+--what SELECT displays is done further down the query 
+--or earlier in the query.
+--SELECT is 7th after all.
+
+--it is a semantic difference.
+--it may seem to me that SELECT /is/ what does the work.
+--but it only displays.
+--it doesn't calculate?
+
+--but what about
+
+--USE Weather_Observation_Station_2;
+--SELECT *
+--	FROM STATION;
+
+--USE Weather_Observation_Station_2;
+--SELECT SUM(LAT_N)
+--	FROM STATION;
+
+--USE Weather_Observation_Station_2;
+--SELECT COUNT(LAT_N)
+--	FROM STATION;
+
+--so, then it seems that I need to work on my understanding.
+--I can't quite grasp it at the moment.
+
+--for now, I will move on.
+
+--I now want to see if I can get
+
+----1. the sum of all values in LAT_N
+--first before doing the rounding.
+--rounding which I practiced last problem.
+
+--USE Weather_Observation_Station_2;
+--SELECT SUM(LAT_N)
+--	FROM STATION;
+
+--Ok, I got the sum of LAT_N.
+
+--Now I am lost if I should get the next sum 
+--or try to get the rounding right.
+--I think it will be easier to get the next sum.
+
+----2. sum of LONG_W
+
+--USE Weather_Observation_Station_2;
+--SELECT SUM(LONG_N) --I will need to change the column name later to LONG_W.
+--	FROM STATION;
+
+--Now, let me try and get both sums in the same query.
+
+USE Weather_Observation_Station_2;
+SELECT SUM(LAT_N), SUM(LONG_N)
+	FROM STATION;
+
+--I want to try and get an error.
+--isn't it that I can't use
+
+--USE Weather_Observation_Station_2;
+--SELECT SUM(LAT_N), LONG_N
+--	FROM STATION;
+
+--RIGHT.  I got the error I wanted.
+
+--"Column 'STATION.LONG_N' is invalid
+--in the select list 
+--because it is not contained 
+--in either an aggregate function 
+--or the GROUP BY clause."
+
+--I am not exactly sure why but I know it gives an error.
+--there must be some database engine reason why.
+--but I forget or I haven't learned it fully yet.
+
+--I may want to explore this tomorrow if at all possible.
+--It may help me with the GROUP BY()
+--issue I am having.
 
