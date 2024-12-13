@@ -122,9 +122,9 @@
 
 --Now, let me try and get both sums in the same query.
 
-USE Weather_Observation_Station_2;
-SELECT SUM(LAT_N), SUM(LONG_N)
-	FROM STATION;
+--USE Weather_Observation_Station_2;
+--SELECT SUM(LAT_N), SUM(LONG_N)
+--	FROM STATION;
 
 --I want to try and get an error.
 --isn't it that I can't use
@@ -148,4 +148,72 @@ SELECT SUM(LAT_N), SUM(LONG_N)
 --I may want to explore this tomorrow if at all possible.
 --It may help me with the GROUP BY()
 --issue I am having.
+
+------------------------------12 12 2024--------------------------
+
+--I have moved on from caring about the errors from the GROUP BY clause
+
+--I want to try and solve the query.
+
+----1. The sum of all values in LAT_N rounded to a scale of 2 decimal places.
+
+----2. The sum of all values in LONG_W rounded to a scale of 2 decimal places.
+
+--I think that I will try and get "rounded to a scale of 2 decimal places"
+
+--what does "scale" mean?
+
+--I think it just means scale.  I don't think that it is a weird trick thing
+--to look out for.
+
+--ok, I am going
+
+--ok, let me look at rounding functions
+--which I should already be very acquainted with since the
+--last problem I worked (the blunder) on was about that but w/e.
+
+--ok, a quick Google.com search found that ol' trusty
+
+----ROUND() function.
+
+--this should be enough.
+--at least for a first solid attempt at solving the query.
+
+USE Weather_Observation_Station_2;
+SELECT ROUND(SUM(LAT_N), 2) AS lat, ROUND(SUM(LONG_N), 2) AS lon
+	FROM STATION;
+
+--very interesting.
+--in MS SQL SERVER, I am getting better answers "42850.04" 
+--where as in the HACKERRANK.COM screen I am getting
+--"42850.040000000"
+
+--so, always a trick.
+
+--I wish it would show up on this screen.
+--or on MS SQL SERVER.
+
+--I do have the same data set, right?
+
+--either way, 
+--I now have to figure out
+--(which I am pretty sure I know how)
+--how to cut the trailing zeroes.
+
+--ok!
+
+--so, "scale" does indeed mean something to look into.
+
+--Precision, scale, and length.
+--Precision is the number of digits in a number.
+--scale is the number of digits to the right of the decimale point in a number.
+--length for a numeric data type is the number of bytes that are used to store the number.
+
+--ok, so.
+--the next time I work on this I need to see about scale.
+--which is what I thought it meant?
+
+--but I now see that when this problem states "scale"
+--it already hints that there will be a problem accomplishing it.
+
 
