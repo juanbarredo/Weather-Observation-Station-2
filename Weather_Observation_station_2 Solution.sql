@@ -179,9 +179,9 @@
 --this should be enough.
 --at least for a first solid attempt at solving the query.
 
-USE Weather_Observation_Station_2;
-SELECT ROUND(SUM(LAT_N), 2) AS lat, ROUND(SUM(LONG_N), 2) AS lon
-	FROM STATION;
+--USE Weather_Observation_Station_2;
+--SELECT ROUND(SUM(LAT_N), 2) AS lat, ROUND(SUM(LONG_N), 2) AS lon
+--	FROM STATION;
 
 --very interesting.
 --in MS SQL SERVER, I am getting better answers "42850.04" 
@@ -216,4 +216,39 @@ SELECT ROUND(SUM(LAT_N), 2) AS lat, ROUND(SUM(LONG_N), 2) AS lon
 --but I now see that when this problem states "scale"
 --it already hints that there will be a problem accomplishing it.
 
+---------------------------------12 15 2024------------------------------------
 
+--ok,
+--I think I have to CAST AS DECIMAL(7,2)?
+
+USE Weather_Observation_Station_2;
+SELECT ROUND(SUM(LAT_N), 2) AS lat, ROUND(SUM(LONG_N), 2) AS lon
+	FROM STATION;
+
+--working on the solution on the HACKERRANK.COM screen
+--I am seeing that on these problems I need to work on the order of operations.
+
+--I keep getting the wrong answer but at least I am not getting an answer like "42850.040000000".
+
+--I just have to play around with a few other things.
+
+--I imagine that it is just like the previous problem, THE_BLUNDER.
+
+--yeah, right now I am overwhelmed by all the nested functions.
+--however, I am getting lots of practice breaking through 
+--perceived limits.
+
+--I now need to take a step back and slow down.
+
+--ok, I have failed at getting the right answer but I am moving forward.
+
+SELECT	ROUND(SUM(CAST(LAT_N AS DECIMAL(7,2))),2) AS lat, 
+				ROUND(SUM(CAST(LONG_N AS DECIMAL(7,2))),2) AS lon
+					FROM STATION;
+
+--ok,
+--so there is a difference between the result set in 
+--query from lines 224-226
+--and query in lines 245 - 247.
+
+--tells me all I need to know that there is a lot more work to do.
