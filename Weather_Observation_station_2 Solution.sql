@@ -221,9 +221,9 @@
 --ok,
 --I think I have to CAST AS DECIMAL(7,2)?
 
-USE Weather_Observation_Station_2;
-SELECT ROUND(SUM(LAT_N), 2) AS lat, ROUND(SUM(LONG_N), 2) AS lon
-	FROM STATION;
+--USE Weather_Observation_Station_2;
+--SELECT ROUND(SUM(LAT_N), 2) AS lat, ROUND(SUM(LONG_N), 2) AS lon
+--	FROM STATION;
 
 --working on the solution on the HACKERRANK.COM screen
 --I am seeing that on these problems I need to work on the order of operations.
@@ -242,9 +242,9 @@ SELECT ROUND(SUM(LAT_N), 2) AS lat, ROUND(SUM(LONG_N), 2) AS lon
 
 --ok, I have failed at getting the right answer but I am moving forward.
 
-SELECT	ROUND(SUM(CAST(LAT_N AS DECIMAL(7,2))),2) AS lat, 
-				ROUND(SUM(CAST(LONG_N AS DECIMAL(7,2))),2) AS lon
-					FROM STATION;
+--SELECT	ROUND(SUM(CAST(LAT_N AS DECIMAL(7,2))),2) AS lat, 
+--				ROUND(SUM(CAST(LONG_N AS DECIMAL(7,2))),2) AS lon
+--					FROM STATION;
 
 --ok,
 --so there is a difference between the result set in 
@@ -252,3 +252,63 @@ SELECT	ROUND(SUM(CAST(LAT_N AS DECIMAL(7,2))),2) AS lat,
 --and query in lines 245 - 247.
 
 --tells me all I need to know that there is a lot more work to do.
+
+--------------------------------12 16 2024---------------------------------
+
+--So, I think I need to re-read the problem better in order to approach the query 
+--with more clarity.
+
+--I think I generally have the right answer.
+
+-- it is just about the order of operations in the
+--nested functions in the SELECT statement.
+
+--I am reading the problem again
+--and it seems deceptively straight forward
+
+--it makes me wonder if I am applying the scale in the wrong order
+--which is giving the wrong answer?
+
+--should the scale be applied last?
+--I think it should.
+
+--ok, the solution I am building up is now 
+
+--SELECT	SUM(LAT_N) AS lat,
+--					SUM(LONG_W) AS lon
+--						FROM STATION;
+
+--I need to then,
+--I believe add the ROUND()
+
+--SELECT	ROUND(SUM(LAT_N),2) AS lat,
+--					ROUND(SUM(LONG_W),2) AS lon
+--						FROM STATION;
+
+--and like before, 
+--I now need to cut off the trailing zeroes.
+--or set the scale to two decimal places after the period.
+
+SELECT	CAST(SUM(LAT_N) AS DECIMAL (7,2)) AS lat,
+				CAST(SUM(LONG_N) AS DECIMAL (7,2)) AS lon
+					FROM STATION;
+
+--AMAZING!
+--PROBLEM SOLVED.
+
+--I feel like at this point there is no way that I could have
+--approached this correctly right away.
+
+--I needed to trial and error.
+
+--I am so happy and relieved to have solved this issue.
+
+--I definitely need work on the order of operations
+--in the SELECT statement.
+
+--this is such a good feeling
+
+--so many doubts have been cleared up
+--I definitely need to keep on going and do
+--these "easy" problems for a long time
+--before I can move on.
